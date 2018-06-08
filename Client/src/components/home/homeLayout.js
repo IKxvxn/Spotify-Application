@@ -6,19 +6,10 @@ import * as HomeActions from './homeActions'
 
 class homeLayout extends Component {
       state = {
-        token:undefined,        
+        token:null,        
       }
 
       render() {
-        console.log(this.state)
-        this.props.SpotifyAPI.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE').then(
-          function(data) {
-            console.log('Artist albums', data.body);
-          },
-          function(err) {
-            console.error(err);
-          }
-        );
         return (
           <Row type="flex" justify="center" align="middle" style={{backgroundColor:this.props.Color_Actual,height:"100vh"}} >
             <Col>
@@ -39,8 +30,8 @@ class homeLayout extends Component {
       }
 
       componentDidMount(){
-        if(this.state.token===undefined){this.props.history.push("/401")}
-        else{this.props.SpotifyAPI.setAccessToken(this.state.token); this.props.history.push("/")}
+        if(this.state.token===null){this.props.history.push('/')}
+        else{this.props.SpotifyAPI.setAccessToken(this.state.token); window.history.replaceState(null, null, "/home");}
       }
 
       componentWillUnmount(){

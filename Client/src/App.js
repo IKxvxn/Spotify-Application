@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
+import { Route, Switch} from 'react-router-dom'
 import HomeLayout from './components/home/homeLayout'
+import WelcomeLayout from './components/welcome/welcomeLayout'
 var SpotifyWebApi = require('spotify-web-api-node');
 
 var SpotifyAPI = new SpotifyWebApi({
@@ -9,13 +12,21 @@ var SpotifyAPI = new SpotifyWebApi({
 });
 
 class App extends Component {
+  renderHome = () =>{ return <HomeLayout SpotifyAPI={SpotifyAPI} />}
   render() {
     return (
       <div className="App">
-        <HomeLayout SpotifyAPI={SpotifyAPI}/>
+        <Switch>
+          <Route exact path='/home' render={this.renderHome}/>
+          <Route component={WelcomeLayout} />
+        </Switch>
       </div>
     );
   }
+  
+  componentWillMount(){
+    if(window.location.pathname!=='/home'){window.history.replaceState(null, null, "/");}
+  }
 }
 
-export default App;
+export default withRouter(App)

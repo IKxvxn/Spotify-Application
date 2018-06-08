@@ -1,0 +1,27 @@
+.welcomeTitle {
+    font-size: 8vw;
+    margin-bottom: 0;
+    font-weight: bold;
+    margin-top: calc(50vh - 8vw);
+    color:#fff;
+}
+
+.welcomeTitle span {
+    background: #d3080b;
+}
+
+.welcomeButton{
+    width: 22vw;
+}
+
+.welcomeContainer {
+    background: #252839;
+    height:100vh;
+    padding-left:25vw;
+}
+
+@media screen and (max-width: 1023px){
+    .welcomeButton{
+        width: 46.3vw;
+    }
+}
